@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 5%;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .box {
+            width: 100%;
+            height: 150px;
+            border: 1px solid #000;
+            margin-top: 3rem;
+        }
+
+        .active {
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+           <div class="d-flex flex-column">
+               <!-- v-on:click == @click on vue js -->
+               <!-- v-bind: == : on vue js -->
+               <!-- apply class with ternary operation -->
+                <div 
+                    class="box" 
+                    v-bind:class="boxAClasses" 
+                    v-on:click="onBoxSelected('A')"
+                ></div>
+               <!-- apply class on key object if value of object == true -->
+               <!-- apply multiple class using array -->
+               <div 
+                    :class="[{active: boxBSelected}, 'box']" 
+                    @click="onBoxSelected('B')"
+                ></div>
+               <!-- apply class on key object if value of object == true -->
+               <div 
+                    class="box" 
+                    :class="{active: boxCSelected}" 
+                    @click="onBoxSelected('C')"
+                ></div>
+           </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+</body>
+</html>
