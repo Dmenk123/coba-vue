@@ -23,13 +23,42 @@
     <!-- passing attr props in components -->
     <!-- if send data with data properties of component, bind props name -->
     <!-- closeEmitEvent is emit event from another component, pass a method to it then emit refference can be call in another component -->
-    <Modal :iniPropData="propData" :text="text" theme="sale" @closeEmitEvent="toggleModal" />
+    <Modal :iniPropData="propData" theme="sale" @closeEmitEvent="toggleModal">
+        <template v-slot:modalLinks>
+          <a href="#">Sign now</a>
+          <a href="#">Sign in</a>
+        </template>
+        <p>Tulisan ini adalah slot, dari root/parent component</p>
+    </Modal>
+  </div>
+
+  <div v-if="showModalTwo">
+    <!-- passing attr props in components -->
+    <!-- if send data with data properties of component, bind props name -->
+    <!-- closeEmitEvent is emit event from another component, pass a method to it then emit refference can be call in another component -->
+    <Modal theme="sale" @closeEmitEvent="toggleModalTwo" :iniPropData="propDataTwo">
+        <template v-slot:modalLinks>
+          <a href="#">Sign now 2</a>
+          <a href="#">Sign in 2</a>
+        </template>
+        <p>
+          Hiii. ini dari modal ke dua
+          Tulisan ini adalah slot, dari root/parent component
+        </p>
+    </Modal>
   </div>
   
   <button @click="toggleModal">open modal</button>
+  <br>
+  <button @click="toggleModalTwo">open modal Two</button>
 </template>
 
 <script>
+// challenge
+//     -   create an extra button to open different modal
+//     -   use the same modal component but pass in a different template
+//     -   use a different method (e.g toggleModalTwo) and data (e.g showModalTwo)
+
 import Modal from './components/Modal.vue'
 import Card from './components/Card.vue'
 
@@ -38,9 +67,10 @@ export default {
   data : () => {
     return {
       title: 'My First Vue App',
-      text: "Ini text dari root component",
-      propData: ['rizky', 4, true],
-      showModal: false
+      propData: ['rizky', 'string data props', 4, true],
+      propDataTwo: [],
+      showModal: false,
+      showModalTwo: false
     }
   },
   methods: {
@@ -53,6 +83,9 @@ export default {
     },
     toggleModal() {
       this.showModal = !this.showModal;
+    },
+    toggleModalTwo() {
+      this.showModalTwo = !this.showModalTwo;
     }
   },
   components: {
@@ -81,6 +114,15 @@ h1 {
   color: #333;
   padding: 8px;
   border: 1px solid magenta;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 10px;
+}
+
+.modal .actions a {
+  color: white;
+  padding: 8px;
+  border: 1px solid whitesmoke;
   border-radius: 4px;
   text-decoration: none;
   margin: 10px;

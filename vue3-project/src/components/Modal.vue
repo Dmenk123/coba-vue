@@ -6,8 +6,13 @@
         <!-- key is classname -->
         <!-- value is check, if true apply class name -->
         <div class="modal" :class="{sale:theme === 'sale'}">
-            <h1>{{iniPropData[0]}}</h1>
-            <p>{{text}}</p>
+            <!-- <h1 v-if="isExistProp">{{iniPropData[0]}} {{iniPropData[1]}}</h1> -->
+            <h1 v-if="iniPropData.length > 0">{{iniPropData[0]}} {{iniPropData[1]}}</h1>
+            <h1 v-else>Kosongan</h1>
+            <slot></slot>
+            <div class="actions">
+                <slot name="modalLinks"></slot>
+            </div>
         </div>
     </div>
 </template>
@@ -16,14 +21,19 @@
 // define props that using in this component
 export default {
     name: 'Modal',
-    props: ['iniPropData', 'text', 'theme'],
+    props: ['iniPropData', 'theme'],
+    data () {
+        return {
+            
+        }
+    },
     methods: {
         closeModal() {
             // emit custom event,
             // param whatever name to it
             // this event will be set in any component as props with methods or data as parameters
             this.$emit('closeEmitEvent');
-        }
+        },
     },
 }
 </script>
